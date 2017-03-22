@@ -30,6 +30,8 @@ public interface MemberDao {
 	public void denyAsMember(int userId);
 
 	public int getMemberIdByUserId(int userId);
+	
+	public int getTeamCreator(int teamId);
 //------------------------------------------------------by hnin ---------------------------------------	
 	public boolean isMember(int LoginID, int teamid);
 
