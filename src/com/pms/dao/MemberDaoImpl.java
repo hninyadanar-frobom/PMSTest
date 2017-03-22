@@ -244,6 +244,15 @@ public class MemberDaoImpl implements MemberDao {
 
 		return isProjMem;
 	}
+	
+	@Override
+	public int getTeamCreator(int teamId) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select userId from member where memberRole=? and teamId=?";
+		String creatorId = jdbcTemplate.queryForObject(sql, new Object[] {1,teamId},String.class);
+		System.out.println(creatorId);
+		return Integer.parseInt(creatorId);
+	}
 
 
 }
