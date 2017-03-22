@@ -54,5 +54,14 @@ public class TeamDaoImpl implements TeamDao {
 		System.out.println(teamId);
 		return Integer.parseInt(teamId);
 	}
+	
+	@Override
+	public String getTeamName(int teamId) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select teamname from team where teamId=?";
+		String teamName = jdbcTemplate.queryForObject(sql, new Object[] {teamId},String.class);
+		System.out.println(teamName);
+		return (teamName);
+	}
 
 }
