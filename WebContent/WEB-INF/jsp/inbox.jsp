@@ -20,19 +20,25 @@
 <body>
 
 	<h2>Inbox</h2>
-
 	<div id="container">
+		<%
+		int creatorId=Integer.parseInt(session.getAttribute("creatorId").toString());
+	  	int userId=3;
+	  	
+	  	if(userId!=creatorId){
+	  
+	%>
+
 		<p>
 			<c:forEach var="member" items="${inboxData}">
 				<ul id="myUL">
 
-					<li><%-- ${member.userName} --%>
-						Create Team 
-						<br /> <br /> 
-						<img src="${noti}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<li>
+						<%-- ${member.userName} --%> Create Team <br /> <br /> <img
+						src="${noti}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<font color="blue"><%=session.getAttribute("teamCreatorName")%></font>
 						invite you to enter <font color="green"> <%=session.getAttribute("teamName")%>
-							Team 
+							Team
 					</font> at <%=session.getAttribute("date") %>. <br />
 
 
@@ -44,20 +50,51 @@
 								type="button" value="Deny" />
 							</a>
 
-						</p></li>
+						</p>
+					</li>
 				</ul>
-			</c:forEach>		
-			<ul id="myUL">
-					<li>
+			</c:forEach>
+		<ul id="myUL">
+			<li>	
+					
+			<% String projectName=(String)session.getAttribute("ProjectName");
+				if(projectName.isEmpty()){
+			%>
+			
+			<img src="${contact}" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			 No Project Assign.
+			
+			<%} else{%>	
+								
 						Project Member
 						<br /> <br /> 
 						<img src="${contact}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<font color="blue"><%=session.getAttribute("ProjectCreatorName")%></font>
 						assigned to you <font color="green"> <%=session.getAttribute("ProjectName")%> Project.</font> 
+				
+		<%} %>
+			</li>
+				</ul>
+				</p>
+		
+				
+		<% }else{ %>
+			
+		
+				
+				<ul id="myUL">
+
+					<li>
+						 Team <%=session.getAttribute("teamName")%> has been created. 
+
 					</li>
 				</ul>
+			
 		
+			
 		
+		<% }%>
 	</div>
 
 </body>
