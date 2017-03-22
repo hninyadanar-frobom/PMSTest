@@ -50,6 +50,8 @@ public class TeamController {
 		HttpSession session = request.getSession(true);
 		int userId = Integer.parseInt(session.getAttribute("userId").toString());
 		String creatorName = userService.getUser(userId).getUserName();
+	/*	int creatorId=userService.getUserId(creatorName).getUserId();
+		session.setAttribute("creatorId", creatorId);*/
 		session.setAttribute("teamCreatorName", creatorName);
 
 		if (team != null) {
@@ -63,6 +65,7 @@ public class TeamController {
 				session.setAttribute("teamId", teamId);
 				System.out.println("Teamid=" + teamId);
 				memberService.saveTeamCreator(userId, teamId);
+				
 			} else {
 
 				for (Team t : teamNameList) {
@@ -81,7 +84,7 @@ public class TeamController {
 				session.setAttribute("teamId", teamId);
 				System.out.println("Teamid=" + teamId);
 				memberService.saveTeamCreator(userId, teamId);
-				
+			
 			}
 
 		}
@@ -154,17 +157,39 @@ public class TeamController {
 	@RequestMapping("/inbox")
 	public ModelAndView inboxView(HttpServletRequest request) {
 		HttpSession session=request.getSession(true);
-		//int userId=Integer.parseInt(session.getAttribute("userId").toString());
-		int userId=1;
-		System.out.println(userId);
-		List<User> inboxData = new ArrayList<User>();
-		User user = userService.getUser(userId);
-		String date=inboxService.getDate(userId);
-		System.out.println(date);
-		inboxData.add(user);
+		int userId=Integer.parseInt(session.getAttribute("userId").toString());	  	
+	  	List<User> inboxData = new ArrayList<User>();
+	  	int memberRole=memberService.getMemberRole(userId);
+	  	session.setAttribute("memberRole", memberRole);
+	  	
+		//String teamCreatorId=session.getAttribute("creatorId").toString();
 		
-		
-		session.setAttribute("date", date);
+	  	if(memberRole==0){
+	  			int inviteTeamId=inboxService.getInviteTeamId(userId);
+	  			String teamName=teamService.getTeamName(inviteTeamId);
+	  			int creator=memberService.getTeamCreator(inviteTeamId);
+	  			String teamCreatorName=userService.getUser(creator).getUserName();
+				User user = userService.getUser(userId);
+				String date=inboxService.getDate(userId);
+				
+				System.out.println(date);
+				inboxData.add(user);
+				
+				
+				session.setAttribute("date", date);
+				session.setAttribute("ProjectName","");
+				session.setAttribute("teamId", inviteTeamId);
+				session.setAttribute("teamName", teamName);
+				session.setAttribute("teamCreatorName", teamCreatorName);
+			
+	  	}
+		 
+	  	/*else{
+	  		
+	  		List<Inbox> acceptedUser=inboxService.acceptedUser(teamId);
+			User user = userService.getUser(acceptedUser.get(userId).getUserId());
+			inboxData.add(user);
+	  	}*/
 		
 
 		return new ModelAndView("inbox", "inboxData", inboxData);
