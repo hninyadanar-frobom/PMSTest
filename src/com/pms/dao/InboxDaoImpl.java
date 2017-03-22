@@ -67,6 +67,14 @@ public class InboxDaoImpl implements InboxDao {
 		jdbcTemplate.update(sql);
 		
 	}
+	
+	@Override
+	public int getInviteTeamId(int userId) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select teamId from inbox where userId=?";
+		String teamId = jdbcTemplate.queryForObject(sql, new Object[] {userId},String.class);
+		return Integer.parseInt(teamId);
+	}
 
 }
 
