@@ -12,5 +12,7 @@ public interface TeamDao {
 	public List<Team> getAllTeamNames();
 	
 	public int getTeamID(String teamName);
+	
+	public String getTeamName(int teamId);
 
 }
