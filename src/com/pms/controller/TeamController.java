@@ -154,10 +154,13 @@ public class TeamController {
 	@RequestMapping("/inbox")
 	public ModelAndView inboxView(HttpServletRequest request) {
 		HttpSession session=request.getSession(true);
-		//int userId=Integer.parseInt(session.getAttribute("userId").toString());
-		int userId=1;
-		System.out.println(userId);
-		List<User> inboxData = new ArrayList<User>();
+		int creatorId=Integer.parseInt(session.getAttribute("creatorId").toString());
+		System.out.println("creatorID:"+creatorId);
+		
+	  	int userId=3;
+	  	List<User> inboxData = new ArrayList<User>();
+	  	
+	  	if(userId!=creatorId){		
 		User user = userService.getUser(userId);
 		String date=inboxService.getDate(userId);
 		System.out.println(date);
@@ -165,8 +168,10 @@ public class TeamController {
 		
 		
 		session.setAttribute("date", date);
+		session.setAttribute("ProjectName","");
 		
-
+	
+	  	}
 		return new ModelAndView("inbox", "inboxData", inboxData);
 	}
 
