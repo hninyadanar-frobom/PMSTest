@@ -1,0 +1,25 @@
+div {
+    width: 100px;
+    height: 100px;
+    background-color: ff8080;
+    -webkit-animation-name: example;
+    -webkit-animation-duration: 6s; 
+    animation-name: example;
+    animation-duration: 6s;
+}
+
+
+@-webkit-keyframes example {
+    0%   {background-color: ff8080;}
+    25%  {background-color: yellow;}
+    50%  {background-color: pink;}
+    100% {background-color: orange;}
+}
+
+
+@keyframes example {
+    0%   {background-color: ff8080;}
+    25%  {background-color: yellow;}
+    50%  {background-color: pink;}
+    100% {background-color: orange;}
+}

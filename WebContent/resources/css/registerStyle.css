@@ -1,0 +1,59 @@
+input[type=text], input[type=password] {
+	width: 200px;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+input[type=submit] {
+	background-color: #008844;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 50%;
+}
+
+input[type=submit]:hover {
+	opacity: 0.9;
+}
+
+input[placeholder] {
+	font-family: monospace;
+}
+
+.container {
+	padding: 20px;
+}
+
+.modal-content {
+	background-color: #f0f0f0;
+	margin: 5% auto 15% auto;
+	border: 1px solid #888;
+	width: 50%;
+	height: auto;
+}
+
+    .animate {
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s
+}
+button {
+	float: right;
+	border: 1px solid #0c799e;
+	width: 30px;
+	padding: 5px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #fff;
+	border-radius: 50px;
+	background: #008844;
+	cursor: pointer
+}
+
+button:hover {
+	color: red;
+} 
