@@ -22,78 +22,54 @@
 	<h2>Inbox</h2>
 	<div id="container">
 		<%
-		int creatorId=Integer.parseInt(session.getAttribute("creatorId").toString());
-	  	int userId=3;
-	  	
-	  	if(userId!=creatorId){
-	  
-	%>
+			int memberRole = Integer.parseInt(session.getAttribute("memberRole").toString());
+			int userId = Integer.parseInt(session.getAttribute("userId").toString());
+			if (memberRole==0) {
+		%>
 
 		<p>
 			<c:forEach var="member" items="${inboxData}">
 				<ul id="myUL">
-
 					<li>
-						<%-- ${member.userName} --%> Create Team <br /> <br /> <img
-						src="${noti}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Create Team <br /> <br /> 
+						<img src="${noti}" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<font color="blue"><%=session.getAttribute("teamCreatorName")%></font>
-						invite you to enter <font color="green"> <%=session.getAttribute("teamName")%>
-							Team
-					</font> at <%=session.getAttribute("date") %>. <br />
-
-
+						invite you to enter <font color="green"> <%=session.getAttribute("teamName")%>Team</font> at <%=session.getAttribute("date") %>. <br />
 
 						<p>
-							<a href="access/${member.userId}/${teamId}"> <input id="hide"
-								type="button" value="Access" />
-							</a> <a id="hide" href="deny/${member.userId}"> <input
-								type="button" value="Deny" />
+							<a href="access/${member.userId}/${teamId}"> 
+								<input id="hide" type="button" value="Access" />
 							</a>
-
+							<a id="hide" href="deny/${member.userId}">
+							 	 <input type="button" value="Deny" />
+							</a>
 						</p>
 					</li>
 				</ul>
 			</c:forEach>
+			
 		<ul id="myUL">
-			<li>	
+			<li>
+				<% String projectName=(String)session.getAttribute("ProjectName");
+					if(projectName.isEmpty()){%>
 					
-			<% String projectName=(String)session.getAttribute("ProjectName");
-				if(projectName.isEmpty()){
-			%>
-			
-			<img src="${contact}" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			
-			 No Project Assign.
-			
-			<%} else{%>	
-								
-						Project Member
-						<br /> <br /> 
-						<img src="${contact}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<font color="blue"><%=session.getAttribute("ProjectCreatorName")%></font>
-						assigned to you <font color="green"> <%=session.getAttribute("ProjectName")%> Project.</font> 
-				
-		<%} %>
+					<img src="${contact}" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No Project Assign by  <%=session.getAttribute("teamName")%>.
+
+				<%} else{%> 
+					Project Member <br /> <br /> <img src="${contact}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<font color="blue"><%=session.getAttribute("ProjectCreatorName")%></font>
+					assigned to you <font color="green"> <%=session.getAttribute("ProjectName")%>Project.</font>  <%} %>
 			</li>
-				</ul>
-				</p>
-		
-				
+		</ul>
+		</p>
+
+
 		<% }else{ %>
-			
-		
-				
-				<ul id="myUL">
 
-					<li>
-						 Team <%=session.getAttribute("teamName")%> has been created. 
-
-					</li>
-				</ul>
-			
-		
-			
-		
+		<ul id="myUL">
+			<li>Team <%=session.getAttribute("teamName")%> has been created.</li>
+		</ul>
 		<% }%>
 	</div>
 
