@@ -38,7 +38,7 @@ public class InboxDaoImpl implements InboxDao {
 		
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Inbox> inboxList=new ArrayList<Inbox>();
-		String sql="select inboxdate from inbox where userId="+userId;
+		String sql="select * from inbox where userId="+userId;
 		inboxList=jdbcTemplate.query(sql, new InboxRowMapper());
 		return inboxList;
 		
@@ -67,13 +67,21 @@ public class InboxDaoImpl implements InboxDao {
 		jdbcTemplate.update(sql);
 		
 	}
-	
+
 	@Override
 	public int getInviteTeamId(int userId) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		String sql = "select teamId from inbox where userId=?";
 		String teamId = jdbcTemplate.queryForObject(sql, new Object[] {userId},String.class);
 		return Integer.parseInt(teamId);
+	}
+
+	@Override
+	public int getInboxStatus(int userId) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select inboxstatus from inbox where userId=?";
+		String inboxstatus = jdbcTemplate.queryForObject(sql, new Object[] {userId},String.class);
+		return Integer.parseInt(inboxstatus);
 	}
 
 }
