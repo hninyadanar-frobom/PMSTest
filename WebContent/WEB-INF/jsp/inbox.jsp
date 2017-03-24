@@ -25,6 +25,8 @@
 			int memberRole = Integer.parseInt(session.getAttribute("memberRole").toString());
 			int userId = Integer.parseInt(session.getAttribute("userId").toString());
 			if (memberRole==0) {
+			int inboxStatus=Integer.parseInt(session.getAttribute("inboxStatus").toString());
+			if(inboxStatus==0){
 		%>
 
 		<p>
@@ -66,6 +68,22 @@
 
 
 		<% }else{ %>
+		<ul id="myUL">
+			<li>
+				<% String projectName=(String)session.getAttribute("ProjectName");
+					if(projectName.isEmpty()){%>
+					
+					<img src="${contact}" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No Project Assign by  <%=session.getAttribute("teamName")%>.
+
+				<%} else{%> 
+					Project Member <br /> <br /> <img src="${contact}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<font color="blue"><%=session.getAttribute("ProjectCreatorName")%></font>
+					assigned to you <font color="green"> <%=session.getAttribute("ProjectName")%>Project.</font>  <%} %>
+			</li>
+		</ul>
+		<%}}else{ %>
+		
 
 		<ul id="myUL">
 			<li>Team <%=session.getAttribute("teamName")%> has been created.</li>
