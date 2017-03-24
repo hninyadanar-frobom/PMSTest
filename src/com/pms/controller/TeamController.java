@@ -166,6 +166,8 @@ public class TeamController {
 		//String teamCreatorId=session.getAttribute("creatorId").toString();
 		
 	  	if(memberRole==0){
+	  			int inboxStatus=inboxService.getInboxStatus(userId);
+	  			session.setAttribute("inboxStatus", inboxStatus);
 	  			int inviteTeamId=inboxService.getInviteTeamId(userId);
 	  			String teamName=teamService.getTeamName(inviteTeamId);
 	  			int creator=memberService.getTeamCreator(inviteTeamId);
@@ -195,6 +197,7 @@ public class TeamController {
 
 		return new ModelAndView("inbox", "inboxData", inboxData);
 	}
+
 
 	@RequestMapping("/access/{userId}/{teamId}")
 	public ModelAndView accessAsMember(@PathVariable int userId, @PathVariable int teamId) {
