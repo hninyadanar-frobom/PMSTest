@@ -10,4 +10,6 @@ public interface InboxDao {
 	public void access(int userId,int teamId);
 	public String getDate(int userId);
 	public void deny(int userId);
+	public int getInviteTeamId(int userId);
+	public int getInboxStatus(int userId);
 }
